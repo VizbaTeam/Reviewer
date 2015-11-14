@@ -3,6 +3,8 @@ var path = require('path');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var mongoose = require('mongoose');
+var fs = require('fs');
 
 var routes = require('./routes/index');
 
@@ -22,6 +24,21 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
+
+//Make connection to DB
+mongoose.connect('mongodb://localhost:27017/ReviewerDB');
+
+/*mongoose.model('users', {userID: String}); 
+app.get('/userss', function(req, res) {
+  mongoose.model('users').find(function(err, users) {
+    res.send(users);
+  });
+});
+*/
+//load all files in models dir
+fs.readdirSync(__dirname + '/models').forEach(function(filename) {
+  if (~filename.indexOf('.js')) require(__dirname + '/models/' + filename)
+});
 
 
 // catch 404 and forward to error handler
