@@ -2,12 +2,17 @@
 <html>
   <head><% include partials/template/head.ejs %></head>
   <body>
+    <section class="header-layout">
     <% include partials/template/header.ejs %>
+    </section>
     
-    <section class="layout" style="margin-top: 15%">
+    <section class="main-layout" style="margin-top: 15%;">
       <% include partials/content/main.ejs %>
     </section><!-- layout -->
+
+    <section class="footer-layout">
     <% include partials/template/footer.ejs %>
+    </section>
     <% include partials/template/jsdefaults.ejs %>
   </body>
 </html>

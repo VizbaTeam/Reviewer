@@ -132,3 +132,11 @@ input:hover {
     outline: none;
     border: 1px solid darkgrey;
 }
+.header-layout{
+  min-height: 6vh;
+  background: orangered;
+}
+.footer-layout{
+  height: 30vh;
+  background: orangered;
+}
