@@ -7,34 +7,51 @@ var Review = require('../models/Review.js');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-	
-  res.render('index', { title: 'Reviewer' });
+
+  res.render('index', {
+    title: 'Reviewer'
+  });
 });
 
 /* GET User page. */
 router.get('/user', function(req, res) {
-   res.render('user', 
-    	{ title : "User" })
+  res.render('user', {
+    title: "User"
+  })
 });
 
 /* GET Results page. */
 router.get('/search', function(req, res) {
-   if(req.query.tag == 'undefined' )
-   res.render('search', 
-    	{ title : "Search",
-    	  tag: "no tag available" })
-	else
-		 res.render('search', 
-    	{ title : "Search",
-    	  tag: req.query.tag })
+        var searchThisTags = req.query.tag;
+        if (searchThisTags === 'undefined')
+          res.render('search', {
+            title: "Search",
+            tag: "no tag available"
+
+          })
+        else {
+
+          console.log("tag is " + searchThisTags);
+
+          Review.find({review: /m/}, 'review userID', function(err, results) {
+            if (err) throw err;
+
+            console.log(results);
+            res.render('search', {
+              title: "Search",
+              results: results
+            })
+          });
+        }
+
 });
 
 /* GET All page. */
 router.get('/all', function(req, res) {
-	
-  mongoose.model('reviews').find(function(err, reviews) {
+
+  Review.find(function(err, reviews) {
     res.send(reviews);
-});
+  });
 });
 
 
@@ -65,7 +82,7 @@ var newReview = Review ({
   userID: "aleksandar.sajdovski"
 });
 
-	newReview.save(function(err) {
+  newReview.save(function(err) {
   if (err) console.log(err);
 
   console.log('Review created!');

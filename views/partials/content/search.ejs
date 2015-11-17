@@ -1,6 +1,12 @@
   <div class="search">
     <section class="layout">
-       <%= tag %>
+    <h2>Reviews</h2>
+    <br/>
+	<ul>
+       <% results.forEach(function(reviewNode) { %>
+        <li><%= reviewNode.review %> - <%= reviewNode.userID %></li>
+    <% }); %>
+    <ul>
        
     </section><!-- layout -->
   </div><!-- search -->
