@@ -33,7 +33,7 @@ router.get('/search', function(req, res) {
 
           console.log("tag is " + searchThisTags);
 
-          Review.find({review: /m/}, 'review userID', function(err, results) {
+          Review.find({review: new RegExp(searchThisTags)}, 'review userID', function(err, results) {
             if (err) throw err;
 
             console.log(results);
