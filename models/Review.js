@@ -4,7 +4,7 @@ var Schema = mongoose.Schema;
 
 // create a schema
 var reviewSchema = new Schema({
-  tag_id: [Number],
+  tag_id: [String],
   review: String,
   category_id: [Number],
   userID: String,
@@ -14,6 +14,7 @@ var reviewSchema = new Schema({
 
 // on every save, add the date
 reviewSchema.pre('save', function(next) {
+  
   var currentDate = new Date();
   this.updated_at = currentDate;
   

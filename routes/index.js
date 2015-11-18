@@ -33,7 +33,7 @@ router.get('/search', function(req, res) {
 
           console.log("tag is " + searchThisTags);
 
-          Review.find({review: new RegExp(searchThisTags)}, 'review userID', function(err, results) {
+          Review.find({tag_id: searchThisTags.toLowerCase()}, 'review userID', function(err, results) {
             if (err) throw err;
 
             console.log(results);
@@ -54,8 +54,26 @@ router.get('/all', function(req, res) {
   });
 });
 
+/*
+router.get('/createReview', function(req, res) {
 
-/*router.get('/users', function(req, res) {
+tag_id_val = "DoMatI";
+console.log(tag_id_val.toLowerCase());
+var newReview = Review ({
+   tag_id: ["tag@#",tag_id_val.toLowerCase()],
+  review: "some new review from the code",
+  category_id: [5, 7, 9],
+  userID: "aleksandar.sajdovski"
+});
+
+  newReview.save(function(err) {
+  if (err) console.log(err);
+
+  console.log('Review created!');
+});
+
+});
+router.get('/users', function(req, res) {
 
 // create a new user
 var newUser = User({
